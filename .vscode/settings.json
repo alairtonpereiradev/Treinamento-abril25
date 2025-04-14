@@ -1,0 +1,7 @@
+{
+    "objectscript.conn": {
+        "server": "alertlocalhost",
+        "ns": "TREINAMENTO_ABRIL",
+        "active": true
+    }
+}

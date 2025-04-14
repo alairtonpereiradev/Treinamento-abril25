@@ -1,0 +1,23 @@
+ROUTINE Exercicio1
+Exercicio1 ;
+
+CALCULAR()
+{
+    READ !,"Digite o valor inicial (X): ",x
+    READ !,"Digite o valor final (Y): ",y
+
+    IF (x > y) {
+        WRITE !,"Erro: O valor inicial (X) deve ser menor ou igual ao valor final (Y)."
+        QUIT
+    }
+
+    WRITE !,"Números divisíveis por 10 com resto 0 entre ",x," e ",y,":",!
+
+    FOR i = x:1:y {
+        IF (i # 10 = 0) {
+            WRITE i,!
+        }
+    }
+}
+
+    
