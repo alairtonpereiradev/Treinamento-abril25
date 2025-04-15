@@ -1,0 +1,7 @@
+ROUTINE Exercicio6
+Exercicio6 ;
+    ;Read "Digite uma data no formato dd/mm/aaaa: ", data, !
+    SET data = "07/03/1980"
+    WRITE $ZDATEH(data,4), !
+    WRITE $ZDATE($ZDATEH(data,4),18), !
+    WRITE $PIECE($ZDATE($ZDATEH(data,4),18)," ",2), !

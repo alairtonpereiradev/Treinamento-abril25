@@ -1,0 +1,33 @@
+ROUTINE exercicioExtra3
+exercicioExtra3 ;
+   ; WRITE $ZDATE(21400),!  ; returns 08/04/1899
+   ; WRITE $ZDATE(50000),!  ; returns 11/23/77
+   ; WRITE $ZDATE(60000),!  ; returns 04/10/2005
+   ; WRITE $ZDATE(0),!      ; returns 12/31/1840
+   ; WRITE !,$ZDATE("60000,12345")
+    WRITE !,$ZDATE($HOROLOG),!
+    WRITE !,$ZDATE($HOROLOG,3),!
+   ; HORARIO
+   ; WRITE $ZTIME($PIECE($HOROLOG,",",2),1)
+   ; WRITE !,$ZTIME($PIECE($HOROLOG,",",2),2),!
+
+   ; WRITE !,$ZDATE($HOROLOG)
+   ; SET fmt=##class(%SYS.NLS.Format).%New("rusw")
+   ; WRITE !,$ZDATE($HOROLOG)
+   ; SET fmt=##class(%SYS.NLS.Format).%New("current")
+   ; WRITE !,$ZDATE($HOROLOG)
+    WRITE $ZDATE($HOROLOG,4),!
+    
+    SET now = $HOROLOG
+    WRITE "Current time and date ($H): ",now,!
+
+    SET odbc = $ZDATETIME(now,3)
+    WRITE "Current time and date (ODBC): ",odbc,!
+
+    SET ldate = $ZDATETIME(now,-1)
+    WRITE "Current time and date in current locale format: ",ldate,!
+
+    SET time = $ZHOROLOG
+    WRITE "Current system time ($ZH): ",time,!
+
+   

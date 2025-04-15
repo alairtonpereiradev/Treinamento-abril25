@@ -1,0 +1,7 @@
+ROUTINE Exercicio7
+Exercicio7 ;
+    Set nome = "Alairton Alves Pereira"
+    WRITE $LENGTH(nome), !
+    WRITE $EXTRACT(nome,1,5), !
+    WRITE $REPLACE(nome," ","@"), !
+    
