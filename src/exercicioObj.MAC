@@ -1,0 +1,10 @@
+ROUTINE exercicioObj
+
+exercicioObj ;
+    kill ^treinamento.Data.CursoD
+    Set curso = ##class(treinamento.Data.Curso).%New()
+    Set curso.Nome = "Curso de Programação em ObjectScript"
+    Set curso.dataInicio = "2023-10-01"
+    Set curso.Duracao = 40
+    Set curso.Preco = 2000
+    Set status = curso.%Save()

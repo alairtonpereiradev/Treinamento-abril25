@@ -3,11 +3,9 @@ Class treinamento.Data.Curso Extends (%Persistent, %XML.Adaptor)
 
 Property Nome As %String(MAXLEN = 200) [ SqlColumnNumber = 2 ];
 
-Property Matricula As %String(MAXLEN = 20) [ SqlColumnNumber = 3 ];
+Property Preco As %Numeric [ SqlColumnNumber = 3 ];
 
-Property Idade As %Integer [ SqlColumnNumber = 4 ];
-
-Property Telefone As %String(MAXLEN = 15) [ SqlColumnNumber = 5 ];
+Property Duracao As %Integer [ SqlColumnNumber = 4 ];
 
 Storage Default
 {
@@ -19,13 +17,10 @@ Storage Default
 <Value>Nome</Value>
 </Value>
 <Value name="3">
-<Value>Matricula</Value>
+<Value>Preco</Value>
 </Value>
 <Value name="4">
-<Value>Idade</Value>
-</Value>
-<Value name="5">
-<Value>Telefone</Value>
+<Value>Duracao</Value>
 </Value>
 </Data>
 <DataLocation>^treinamento.Data.CursoD</DataLocation>
