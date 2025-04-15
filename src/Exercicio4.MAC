@@ -1,0 +1,14 @@
+ROUTINE Exercicio4
+Exercicio4 ;
+    Read !,"Digite a matricula: " ,matricula
+    Read !,"Digite o Nome completo: " ,nomeCompleto
+    Read !,"Digite o Telefone: " ,Telefone
+    Read !,"Digite a data de nascimento: " ,dataNascimento
+    Read !,"Digite o Sexo(M|F): " ,sexo
+
+    
+    Write !,"Digite a matricula: " ,matricula
+    Write !,"Digite o Nome completo: " ,nomeCompleto
+    Write !,"Digite o Telefone: " ,Telefone
+    Write !,"Digite a data de nascimento: " ,dataNascimento
+    Write !,"Digite o Sexo(M|F): " ,sexo

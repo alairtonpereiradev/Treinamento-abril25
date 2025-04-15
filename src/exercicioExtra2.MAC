@@ -1,0 +1,5 @@
+ROUTINE exercicioExtra2
+exercicioExtra2 ;
+    SET hit=$RANDOM(5)
+    SET atbat=$CASE(hit,1:"single",2:"double",3:"triple",4:"home run",:"strike out")
+    WRITE hit," = ",atbat
