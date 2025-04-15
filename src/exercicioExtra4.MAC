@@ -1,0 +1,25 @@
+ROUTINE exercicioExtra4
+exercicioExtra4 ;
+    
+Start  ; Raise an integer to a randomly-selected power.
+  SET exp=$RANDOM(6)
+  SET num=4
+  DO $CASE(exp,0:NoMul(),2:Square(num),3:Cube(num),:Exponent(num,exp))
+  WRITE !,num," ",result,!
+  RETURN
+Square(n)
+  SET result=n*n
+  SET result="Squared = "_result
+  RETURN
+Cube(n)
+  SET result=n*n*n
+  SET result="Cubed = "_result
+  RETURN
+Exponent(n,x)
+  SET result=n
+  FOR i=1:1:x-1 { SET result=result*n }
+  SET result="exponent "_x_" = "_result
+  RETURN
+NoMul()
+  SET result="multiply by zero"
+  RETURN
