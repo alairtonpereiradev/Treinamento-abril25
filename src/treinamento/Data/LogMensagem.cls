@@ -28,7 +28,7 @@ ClassMethod CriarEntrada(pMetodo As %String, pClasse As %String) As treinamento.
         Set entry.Classe        = pClasse
         Set entry.Inicio        = $ZDATETIME($H, 4)
         Set entry.Fim           = ""
-        Set entry.status        = statusCode
+        Set entry.Status        = statusCode
         set statusCode          = entry.%Save()
 
     }
