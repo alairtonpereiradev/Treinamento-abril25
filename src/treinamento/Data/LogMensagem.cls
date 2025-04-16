@@ -30,18 +30,11 @@ ClassMethod CriarEntrada(pMetodo As %String, pClasse As %String) As treinamento.
         Set entry.Fim           = ""
         Set entry.status        = statusCode
         set statusCode          = entry.%Save()
-        ;if($SYSTEM.Status.IsError(statusCode)) {
-        ;    Set tSC = statusCode
-        ;    Quit tSC
-        ;}
-        ;Set entry.StatusProcesso = "Iniciado"
 
     }
     Catch(exception) {
         Set tSC = exception.AsStatus()
-        Set erromensagem = $SYSTEM.Status.GetOneErrorText(tSC)
-        ;Write "Erro: "_erromensagem
-        ;Quit tSC
+        Set erroMensagem = $SYSTEM.Status.GetOneErrorText(tSC)
         Throw exception
     }
     return entry
@@ -59,17 +52,53 @@ ClassMethod Finalizar(pIdLog As %Integer, pStatusProcesso As %String, pstatusCod
         Set entry.StatusProcesso = pStatusProcesso
         Set entry.Status        = pstatusCode
         set statusLog          = entry.%Save()
-        ;if($SYSTEM.Status.IsError(statusCode)) {
-        ;    Set tSC = statusCode
-        ;    Quit tSC
-        ;}
     }
     Catch(exception) {
         Set tSC = exception.AsStatus()
-        Set erromensagem = $SYSTEM.Status.GetOneErrorText(tSC)
-        ;Write "Erro: "_erromensagem
-        ;Quit tSC
+        Set erroMensagem = $SYSTEM.Status.GetOneErrorText(tSC)
         Throw exception
+    }
+    return entry
+}
+
+ClassMethod ConsultaLog(pStatus As %Boolean, pDataInicio As %String = "", pDataFim As %String) As treinamento.Data.VO.LogMensagem
+{
+   
+    try 
+    {   
+        #Dim StatusCode   As %Status            = $SYSTEM.Status.OK()
+        #Dim exception    As %Exception.General = ""
+        #Dim SQL          As %String
+        #Dim resultSet    As %ResultSet 
+        #Dim entry        AS LogMensagem        = ..%New()
+
+        Set SQL = "SELECT * FROM treinamento_Data.LogMensagem WHERE Status =  "_pStatus
+        Set SQL = SQL_ " AND FIM <= '"pDataFim"'"
+        Set resultSet = ##class(%ResultSet).%New()
+        Set statusCode = resultSet.Prepare(SQL)
+        set statusCode = resultSet.Execute()
+        if $System.Status.Error(statusCode) return statusCode
+
+        While (resultSet.Next())
+        {
+            Set pItem = ##class(treinamento.Data.VO.LogMensagem).%New()
+            Set pItem.Metodo          = resultSet.%Get("Metodo")     
+            Set pItem.Classe          = resultSet.%Get("Classe")
+            Set pItem.Inicio          = resultSet.%Get("Inicio")     
+            Set pItem.Fim             = resultSet.%Get("Fim")
+            Set pItem.Status          = resultSet.%Get("Status")     
+            Set pItem.StatusProcesso  = resultSet.%Get("StatusProcesso")
+            Do entry.ListaLog.Insert(pItem)
+        }
+      
+
+    }
+    Catch(exception)
+    {
+        Set tSC           = exception.AsStatus()
+        Set erroMensagem  = $SYSTEM.Status.GetOneErrorText(tSC)
+        Throw exception
+        
     }
     return entry
 }

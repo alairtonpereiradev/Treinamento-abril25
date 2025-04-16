@@ -1,17 +1,16 @@
 ROUTINE CriarLogMensagem
 CriarLogMensagem ;
-    Set pClasse = "LogMensagem"
-    Set pMetodo = "LogMetodo"
-    Set pStatusProcesso = "Processo"
-    Set pStatusCode = "1"
+ Set pDatainicio = ##class(%UTC).NowLocal()
+ Set pStatus = 1
+ Set pClasse = "LogMensagem"
+ Set pMetodo = "LogMetodo"
+ Set pStatusProcesso = "Processo realizado com sucesso."
+ Set pStatusCode = "1"
 
-    Set LogMensagemCriar = ##class(treinamento.Data.LogMensagem).CriarEntrada(pClasse, pMetodo)
-    If LogMensagemCriar '= 1 {
-        WRITE "Erro ao criar log de mensagem", !
-    } Else {
-        WRITE "Log de mensagem criado com sucesso", !
-    }
+ Set LogMensagemCriar = ##class(treinamento.Data.LogMensagem).CriarEntrada(pMetodo,pClasse)
 
-    set IdLog = LogMensagemCriar.%Id()
-    set LogMensagemFim = ##Class(treinamento.Data.LogMensagem).Finalizar(IdLog, pStatusProcesso, pStatusCode)
-
+ Set IdLog = LogMensagemCriar.%Id()
+ Set LogMensagemFim = ##Class(treinamento.Data.LogMensagem).Finalizar(IdLog, pStatusProcesso, pStatusCode)
+ Set ConsultaLog = ##Class(treinamento.Data.LogMensagem).Consultar(pStatus, pDataInicio, pDataFim)
+ ZW ConsultaLog
+ 
