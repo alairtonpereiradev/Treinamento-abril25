@@ -12,3 +12,103 @@ exercicioObj ;
     } Else {
         WRITE "Curso salvo com sucesso", !
     }
+
+    kill ^treinamento.Data.AlunoD
+    Set aluno1 = ##class(treinamento.Data.Aluno).%New()
+    Set aluno1.Nome = "Pedro Abner Pereira"
+    Set aluno1.Matricula = 640785
+    Set aluno1.Idade = "03"
+    Set aluno1.Telefone = "9999-9999"
+    Set status = aluno1.%Save()
+    If status '= 1 {
+        WRITE "Erro ao salvar aluno", !
+    } Else {
+        WRITE "Aluno salvo com sucesso", !
+    }
+    ;kill ^treinamento.Data.AlunoD
+    Set aluno2 = ##class(treinamento.Data.Aluno).%New()
+    Set aluno2.Nome = "Darlene"
+    Set aluno2.Matricula = 789456
+    Set aluno2.Idade = "60"
+    Set aluno2.Telefone = "9999-9991"
+    Set status = aluno2.%Save()
+    If status '= 1 {
+        WRITE "Erro ao salvar aluno", !
+    } Else {
+        WRITE "Aluno salvo com sucesso", !
+    }
+    ;kill ^treinamento.Data.AlunoD
+    Set aluno3 = ##class(treinamento.Data.Aluno).%New()
+    Set aluno3.Nome = "Moncilair"
+    Set aluno3.Matricula = 640785
+    Set aluno3.Idade = "62"
+    Set aluno3.Telefone = "9999-9992"
+    Set status = aluno3.%Save()
+    If status '= 1 {
+        WRITE "Erro ao salvar aluno", !
+    } Else {
+        WRITE "Aluno salvo com sucesso", !
+    }
+    ;kill ^treinamento.Data.AlunoD
+    Set aluno4 = ##class(treinamento.Data.Aluno).%New()
+    Set aluno4.Nome = "Malu"
+    Set aluno4.Matricula = 456123
+    Set aluno4.Idade = "04"
+    Set aluno4.Telefone = "9999-9993"
+    Set status = aluno4.%Save()
+    If status '= 1 {
+        WRITE "Erro ao salvar aluno", !
+    } Else {
+        WRITE "Aluno salvo com sucesso", !
+    }
+
+    kill ^treinamento.Data.InstrutorD
+    Set instrutor = ##class(treinamento.Data.Instrutor).%New()
+    Set instrutor.Nome = "Alairton Alves Pereira"
+    Set instrutor.Matricula = 640784
+    Set status = instrutor.%Save()
+    If status '= 1 {
+        WRITE "Erro ao salvar instrutor", !
+    } Else {
+        WRITE "Instrutor salvo com sucesso", !
+    }
+
+    ;kill ^treinamento.Data.InstrutorD
+    ;Set instrutor2 = ##class(treinamento.Data.Instrutor).%New()
+    ;Set instrutor2.Nome = "Denise Pereira"
+    ;Set instrutor2.Matricula = 08012
+    ;Set status = instrutor2.%Save()
+    ;If status '= 1 {
+    ;    WRITE "Erro ao salvar instrutor", !
+    ;} Else {
+    ;    WRITE "Instrutor salvo com sucesso", !
+    ;}
+
+    ;kill ^treinamento.Data.InstrutorD
+    ;Set instrutor3 = ##class(treinamento.Data.Instrutor).%New()
+    ;Set instrutor3.Nome = "Alisson Pereira"
+    ;Set instrutor3.Matricula = 123456
+    ;Set status = instrutor3.%Save()
+    ;If status '= 1 {
+    ;    WRITE "Erro ao salvar instrutor", !
+    ;} Else {
+    ;    WRITE "Instrutor salvo com sucesso", !
+    ;}
+
+    kill ^treinamento.Data.TurmaD
+    Set turma = ##class(treinamento.Data.Turma).%New()
+    Set turma.DataInicio = ""
+    Set turma.Status = "Incompleta"
+    Set turma.Curso = curso    
+    Do turma.Alunos.Insert(aluno1)
+    Do turma.Alunos.Insert(aluno2)
+    Do turma.Alunos.Insert(aluno3)
+    Do turma.Alunos.Insert(aluno4)
+    Set turma.Instrutor = instrutor
+    Set status = turma.%Save()
+    If status '= 1 {
+        WRITE "Erro ao salvar turma", !
+    } Else {
+        WRITE "Turma salva com sucesso", !
+    }
+

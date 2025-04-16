@@ -4,6 +4,11 @@ ExercicioObjTurma ;
     Set turma = ##class(treinamento.Data.Turma).%New()
     Set turma.DataInicio = ""
     Set turma.Status = "Incompleta"
+    Set turma.Curso = curso
+    Do turma.Alunos.Insert(aluno1)
+    Do turma.Alunos.Insert(aluno2)
+    Do turma.Alunos.Insert(aluno3)
+    Do turma.Alunos.Insert(aluno4)
     Set status = turma.%Save()
     If status '= 1 {
         WRITE "Erro ao salvar turma", !
