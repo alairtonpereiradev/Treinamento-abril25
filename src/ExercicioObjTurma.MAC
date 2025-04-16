@@ -1,0 +1,12 @@
+ROUTINE ExercicioObjTurma
+ExercicioObjTurma ;
+    kill ^treinamento.Data.TurmaD
+    Set turma = ##class(treinamento.Data.Turma).%New()
+    Set turma.DataInicio = ""
+    Set turma.Status = "Incompleta"
+    Set status = turma.%Save()
+    If status '= 1 {
+        WRITE "Erro ao salvar turma", !
+    } Else {
+        WRITE "Turma salva com sucesso", !
+    }

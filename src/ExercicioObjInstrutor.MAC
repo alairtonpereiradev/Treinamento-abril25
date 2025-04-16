@@ -1,0 +1,34 @@
+ROUTINE ExercicioObjInstrutor
+ExercicioObjInstrutor ;
+    kill ^treinamento.Data.InstrutorD
+    Set instrutor = ##class(treinamento.Data.Instrutor).%New()
+    Set instrutor.Nome = "Alairton Alves Pereira"
+    Set instrutor.Matricula = 640784
+    Set status = instrutor.%Save()
+    If status '= 1 {
+        WRITE "Erro ao salvar instrutor", !
+    } Else {
+        WRITE "Instrutor salvo com sucesso", !
+    }
+
+    ;kill ^treinamento.Data.InstrutorD
+    Set instrutor = ##class(treinamento.Data.Instrutor).%New()
+    Set instrutor.Nome = "Denise Pereira"
+    Set instrutor.Matricula = 08012
+    Set status = instrutor.%Save()
+    If status '= 1 {
+        WRITE "Erro ao salvar instrutor", !
+    } Else {
+        WRITE "Instrutor salvo com sucesso", !
+    }
+
+    ;kill ^treinamento.Data.InstrutorD
+    Set instrutor = ##class(treinamento.Data.Instrutor).%New()
+    Set instrutor.Nome = "Alisson Pereira"
+    Set instrutor.Matricula = 123456
+    Set status = instrutor.%Save()
+    If status '= 1 {
+        WRITE "Erro ao salvar instrutor", !
+    } Else {
+        WRITE "Instrutor salvo com sucesso", !
+    }

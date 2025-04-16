@@ -7,3 +7,8 @@ exercicioObj ;
     Set curso.Duracao = 40
     Set curso.Preco = 2000
     Set status = curso.%Save()
+    If status '= 1 {
+        WRITE "Erro ao salvar curso", !
+    } Else {
+        WRITE "Curso salvo com sucesso", !
+    }

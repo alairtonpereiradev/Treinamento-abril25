@@ -1,0 +1,50 @@
+ROUTINE ExercicioObjAluno
+ExercicioObjAluno ;
+    kill ^treinamento.Data.AlunoD
+    Set aluno = ##class(treinamento.Data.Aluno).%New()
+    Set aluno.Nome = "Pedro Abner Pereira"
+    Set aluno.Matricula = 640785
+    Set aluno.Idade = "03"
+    Set aluno.Telefone = "9999-9999"
+    Set status = aluno.%Save()
+    If status '= 1 {
+        WRITE "Erro ao salvar aluno", !
+    } Else {
+        WRITE "Aluno salvo com sucesso", !
+    }
+
+    Set aluno = ##class(treinamento.Data.Aluno).%New()
+    Set aluno.Nome = "Darlene"
+    Set aluno.Matricula = 789456
+    Set aluno.Idade = "03"
+    Set aluno.Telefone = "9999-9991"
+    Set status = aluno.%Save()
+    If status '= 1 {
+        WRITE "Erro ao salvar aluno", !
+    } Else {
+        WRITE "Aluno salvo com sucesso", !
+    }
+
+    Set aluno = ##class(treinamento.Data.Aluno).%New()
+    Set aluno.Nome = "Moncilair"
+    Set aluno.Matricula = 640785
+    Set aluno.Idade = "03"
+    Set aluno.Telefone = "9999-9992"
+    Set status = aluno.%Save()
+    If status '= 1 {
+        WRITE "Erro ao salvar aluno", !
+    } Else {
+        WRITE "Aluno salvo com sucesso", !
+    }
+
+    Set aluno = ##class(treinamento.Data.Aluno).%New()
+    Set aluno.Nome = "Malu"
+    Set aluno.Matricula = 456123
+    Set aluno.Idade = "03"
+    Set aluno.Telefone = "9999-9993"
+    Set status = aluno.%Save()
+    If status '= 1 {
+        WRITE "Erro ao salvar aluno", !
+    } Else {
+        WRITE "Aluno salvo com sucesso", !
+    }
