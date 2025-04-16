@@ -16,12 +16,13 @@ Method VerificaStatus(curso As %String) As %String [ Language = objectscript ]
 {
     Set statusTurma = ""
     Set SQL = "Select * from treinamento_Data.Turma where Curso->Nome = '"_curso_"'"
-    Set resultSet = ##class(%ResultSet).%New()
-    Set status = resultSet.Prepare(SQL)
-    Set status = resultSet.Execute()
-
-    if resultSet.Next(){
-        Set statusTurma = resultSet.Get("Status")
+    Set statement = ##class(%SQL.Statement).%New()
+    Set status = statement.%Prepare(SQL)
+    If $SYSTEM.Status.IsError(status) Quit ""
+    
+    Set resultSet = statement.%Execute()
+    If resultSet.%Next() {
+        Set statusTurma = resultSet.%Get("Status")
     }
     
     Return statusTurma
@@ -30,18 +31,15 @@ Method VerificaStatus(curso As %String) As %String [ Language = objectscript ]
 ClassMethod ImprimeTurma(curso As %String) As %String [ Language = objectscript ]
 {
     
-    Set Status = $$$OK    
-    Set SQL = "Select * from treinamento_Data.Turma where Curso->Nome = '"_curso_"'"   
-    Set resultSet = ##class(%ResultSet).%New()
-
-     Set status = resultSet.Prepare(SQL)
-    if $SYSTEM.Status.IsError(Status) return Status
-      
-    Set status = resultSet.Execute()
-    if $SYSTEM.Status.IsError(Status) return Status
-
-    If resultSet.Next()
-    {
+    Set Status = $$$OK
+    Set SQL = "Select * from treinamento_Data.Turma where Curso->Nome = '"_curso_"'"    
+    Set statement = ##class(%SQL.Statement).%New()
+    Set status = statement.%Prepare(SQL)
+    If $SYSTEM.Status.IsError(status) Quit status
+    
+    Set resultSet = statement.%Execute()
+    If resultSet.%Next() {
+        Set idTurma = resultSet.%Get("ID")
         Set idTurma = resultSet.Get("ID")
         Set turma = ##class(treinamento.Data.Turma).%OpenId(idTurma)
     }

@@ -2,6 +2,8 @@ ROUTINE CriarLogMensagem
 CriarLogMensagem ;
     Set pClasse = "LogMensagem"
     Set pMetodo = "LogMetodo"
+    Set pStatusProcesso = "Processo"
+    Set pStatusCode = "1"
 
     Set LogMensagemCriar = ##class(treinamento.Data.LogMensagem).CriarEntrada(pClasse, pMetodo)
     If LogMensagemCriar '= 1 {
@@ -9,3 +11,7 @@ CriarLogMensagem ;
     } Else {
         WRITE "Log de mensagem criado com sucesso", !
     }
+
+    set IdLog = LogMensagemCriar.%Id()
+    set LogMensagemFim = ##Class(treinamento.Data.LogMensagem).Finalizar(IdLog, pStatusProcesso, pStatusCode)
+

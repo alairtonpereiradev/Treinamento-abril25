@@ -47,6 +47,33 @@ ClassMethod CriarEntrada(pMetodo As %String, pClasse As %String) As treinamento.
     return entry
 }
 
+ClassMethod Finalizar(pIdLog As %Integer, pStatusProcesso As %String, pstatusCode As %String) As treinamento.Data.LogMensagem
+{
+    Set tSC = $$$OK
+    try {
+        #Dim exception  As %Exception.General   = ""
+        #Dim statusCode As %Status              = $SYSTEM.Status.OK()
+        #Dim entry      As LogMensagem          = ..%OpenId(pIdLog)
+
+        Set entry.Fim           = $ZDATETIME($H, 4)
+        Set entry.StatusProcesso = pStatusProcesso
+        Set entry.Status        = pstatusCode
+        set statusLog          = entry.%Save()
+        ;if($SYSTEM.Status.IsError(statusCode)) {
+        ;    Set tSC = statusCode
+        ;    Quit tSC
+        ;}
+    }
+    Catch(exception) {
+        Set tSC = exception.AsStatus()
+        Set erromensagem = $SYSTEM.Status.GetOneErrorText(tSC)
+        ;Write "Erro: "_erromensagem
+        ;Quit tSC
+        Throw exception
+    }
+    return entry
+}
+
 Storage Default
 {
 <Data name="LogMensagemDefaultData">
