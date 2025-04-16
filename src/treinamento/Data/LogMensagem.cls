@@ -69,17 +69,17 @@ ClassMethod ConsultaLog(pStatus As %Boolean, pDataInicio As %String = "", pDataF
         #Dim StatusCode   As %Status            = $SYSTEM.Status.OK()
         #Dim exception    As %Exception.General = ""
         #Dim SQL          As %String
-        #Dim resultSet    As %ResultSet 
+        #Dim statement    As %SQL.Statement
+        #Dim resultSet    As %SQL.StatementResult
         #Dim entry        AS LogMensagem        = ..%New()
 
-        Set SQL = "SELECT * FROM treinamento_Data.LogMensagem WHERE Status =  "_pStatus
-        Set SQL = SQL_ " AND FIM <= '"pDataFim"'"
-        Set resultSet = ##class(%ResultSet).%New()
-        Set statusCode = resultSet.Prepare(SQL)
-        set statusCode = resultSet.Execute()
-        if $System.Status.Error(statusCode) return statusCode
+        Set SQL = "SELECT * FROM treinamento_Data.LogMensagem WHERE Status = ? AND FIM <= ?"
+        Set statement = ##class(%SQL.Statement).%New()
+        Set statusCode = statement.%Prepare(SQL)
+        If $System.Status.Error(statusCode) Return statusCode
 
-        While (resultSet.Next())
+        Set resultSet = statement.%Execute(pStatus, pDataFim)
+        While (resultSet.%Next())
         {
             Set pItem = ##class(treinamento.Data.VO.LogMensagem).%New()
             Set pItem.Metodo          = resultSet.%Get("Metodo")     
