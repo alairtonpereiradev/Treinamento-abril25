@@ -11,6 +11,48 @@ Property Alunos As list Of treinamento.Data.Aluno [ SqlColumnNumber = 5 ];
 
 Property Curso As treinamento.Data.Curso [ SqlColumnNumber = 6 ];
 
+/// VerificaStatus
+Method VerificaStatus(curso As %String) As %String [ Language = objectscript ]
+{
+    Set statusTurma = ""
+    Set SQL = "Select * from treinamento_Data.Turma where Curso->Nome = '"_curso_"'"
+    Set resultSet = ##class(%ResultSet).%New()
+    Set status = resultSet.Prepare(SQL)
+    Set status = resultSet.Execute()
+
+    if resultSet.Next(){
+        Set statusTurma = resultSet.Get("Status")
+    }
+    
+    Return statusTurma
+}
+
+ClassMethod ImprimeTurma(curso As %String) As %String [ Language = objectscript ]
+{
+    
+    Set Status = $$$OK    
+    Set SQL = "Select * from treinamento_Data.Turma where Curso->Nome = '"_curso_"'"   
+    Set resultSet = ##class(%ResultSet).%New()
+
+     Set status = resultSet.Prepare(SQL)
+    if $SYSTEM.Status.IsError(Status) return Status
+      
+    Set status = resultSet.Execute()
+    if $SYSTEM.Status.IsError(Status) return Status
+
+    If resultSet.Next()
+    {
+        Set idTurma = resultSet.Get("ID")
+        Set turma = ##class(treinamento.Data.Turma).%OpenId(idTurma)
+    }
+    For x= 1:1: turma.Alunos.Count()
+    {
+         Set aluno = turma.Alunos.GetAt(x)
+         W "Nome : "_aluno.Nome, " Matricula : "_aluno.Matricula, " Idade :"_aluno.Idade, !
+    }
+    return
+}
+
 Storage Default
 {
 <Data name="TurmaDefaultData">

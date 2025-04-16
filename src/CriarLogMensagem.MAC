@@ -1,0 +1,11 @@
+ROUTINE CriarLogMensagem
+CriarLogMensagem ;
+    Set pClasse = "LogMensagem"
+    Set pMetodo = "LogMetodo"
+
+    Set LogMensagemCriar = ##class(treinamento.Data.LogMensagem).CriarEntrada(pClasse, pMetodo)
+    If LogMensagemCriar '= 1 {
+        WRITE "Erro ao criar log de mensagem", !
+    } Else {
+        WRITE "Log de mensagem criado com sucesso", !
+    }

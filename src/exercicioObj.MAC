@@ -63,10 +63,10 @@ exercicioObj ;
     }
 
     kill ^treinamento.Data.InstrutorD
-    Set instrutor = ##class(treinamento.Data.Instrutor).%New()
-    Set instrutor.Nome = "Alairton Alves Pereira"
-    Set instrutor.Matricula = 640784
-    Set status = instrutor.%Save()
+    Set instrutor1 = ##class(treinamento.Data.Instrutor).%New()
+    Set instrutor1.Nome = "Alairton Alves Pereira"
+    Set instrutor1.Matricula = 640784
+    Set status = instrutor1.%Save()
     If status '= 1 {
         WRITE "Erro ao salvar instrutor", !
     } Else {
@@ -74,26 +74,26 @@ exercicioObj ;
     }
 
     ;kill ^treinamento.Data.InstrutorD
-    ;Set instrutor2 = ##class(treinamento.Data.Instrutor).%New()
-    ;Set instrutor2.Nome = "Denise Pereira"
-    ;Set instrutor2.Matricula = 08012
-    ;Set status = instrutor2.%Save()
-    ;If status '= 1 {
-    ;    WRITE "Erro ao salvar instrutor", !
-    ;} Else {
-    ;    WRITE "Instrutor salvo com sucesso", !
-    ;}
+    Set instrutor2 = ##class(treinamento.Data.Instrutor).%New()
+    Set instrutor2.Nome = "Denise Pereira"
+    Set instrutor2.Matricula = 08012
+    Set status = instrutor2.%Save()
+    If status '= 1 {
+        WRITE "Erro ao salvar instrutor", !
+    } Else {
+        WRITE "Instrutor salvo com sucesso", !
+    }
 
     ;kill ^treinamento.Data.InstrutorD
-    ;Set instrutor3 = ##class(treinamento.Data.Instrutor).%New()
-    ;Set instrutor3.Nome = "Alisson Pereira"
-    ;Set instrutor3.Matricula = 123456
-    ;Set status = instrutor3.%Save()
-    ;If status '= 1 {
-    ;    WRITE "Erro ao salvar instrutor", !
-    ;} Else {
-    ;    WRITE "Instrutor salvo com sucesso", !
-    ;}
+    Set instrutor3 = ##class(treinamento.Data.Instrutor).%New()
+    Set instrutor3.Nome = "Alisson Pereira"
+    Set instrutor3.Matricula = 123456
+    Set status = instrutor3.%Save()
+    If status '= 1 {
+        WRITE "Erro ao salvar instrutor", !
+    } Else {
+        WRITE "Instrutor salvo com sucesso", !
+    }
 
     kill ^treinamento.Data.TurmaD
     Set turma = ##class(treinamento.Data.Turma).%New()
@@ -104,8 +104,11 @@ exercicioObj ;
     Do turma.Alunos.Insert(aluno2)
     Do turma.Alunos.Insert(aluno3)
     Do turma.Alunos.Insert(aluno4)
-    Set turma.Instrutor = instrutor
+    Set turma.Instrutor = instrutor2
+
     Set status = turma.%Save()
+    Set statusTurma = turma.VerificaStatus("Curso de Programação em ObjectScript")
+    Do ##class(treinamento.Data.Turma).imprimeTurma("Curso de Programação em ObjectScript")
     If status '= 1 {
         WRITE "Erro ao salvar turma", !
     } Else {
