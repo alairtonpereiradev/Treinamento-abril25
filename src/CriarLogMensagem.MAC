@@ -1,16 +1,24 @@
 ROUTINE CriarLogMensagem
 CriarLogMensagem ;
- Set pDatainicio = ##class(%UTC).NowLocal()
- Set pStatus = 1
+ Set pDataInicio = ##class(%UTC).NowLocal()
+ Set pStatus = 0
  Set pClasse = "LogMensagem"
  Set pMetodo = "LogMetodo"
- Set pStatusProcesso = "Processo realizado com sucesso."
+ Set pStatusProcesso = "Processo realizado com sucesso!" 
  Set pStatusCode = "1"
+ Set pLastId = 12
+ Set pPageSize = 10
+ Set pDataFim = $ZDateTime($HOROLOG,4)
+
 
  Set LogMensagemCriar = ##class(treinamento.Data.LogMensagem).CriarEntrada(pMetodo,pClasse)
 
  Set IdLog = LogMensagemCriar.%Id()
  Set LogMensagemFim = ##Class(treinamento.Data.LogMensagem).Finalizar(IdLog, pStatusProcesso, pStatusCode)
- Set ConsultaLog = ##Class(treinamento.Data.LogMensagem).Consultar(pStatus, pDataInicio, pDataFim)
+ ;Set ConsultaLog = ##Class(treinamento.Data.LogMensagem).ConsultaLogBasico(pStatus, pDataInicio, pDataFim)
+ Set ConsultaLog = ##class(treinamento.Data.LogMensagem).ConsultaLog(pStatus,pDataInicio,pDataInicio)
  ZW ConsultaLog
+ Set ConsultaLogPaginacao = ##class(treinamento.Data.LogMensagem).ConsultaLogPaginacao(pStatus,pLastId, pPageSize, pDataFim)
+ ;Do ##class(treinamento.Data.LogMensagem).ConsultaLogPaginacao(pStatus,pLastId, pPageSize, pDataFim)
+ ZW ConsultaLogPaginacao
  

@@ -61,7 +61,7 @@ ClassMethod Finalizar(pIdLog As %Integer, pStatusProcesso As %String, pstatusCod
     return entry
 }
 
-ClassMethod ConsultaLog(pStatus As %Boolean, pDataInicio As %String = "", pDataFim As %String) As treinamento.Data.VO.LogMensagem
+ClassMethod ConsultaLog(pStatus As %Boolean, pDataInicio As %String, pDataFim As %String) As treinamento.Data.VO.LogMensagem
 {
    
     try 
@@ -102,6 +102,58 @@ ClassMethod ConsultaLog(pStatus As %Boolean, pDataInicio As %String = "", pDataF
     }
     return entry
 }
+
+ClassMethod ConsultaLogBasico(pStatus As %Boolean, pDataInicio As %String = "", pDataFim As %String) As treinamento.Data.VO.LogMensagem
+{
+   
+    #Dim LogMensagem  AS LogMensagem = ..%New()
+    Set LogMensagem = ..ConsultaLog(pStatus,pDataInicio,pDataFim)
+    W "A quantidade de logs encontrado foi ... : "_LogMensagem.ListaLog.Count()
+}
+
+ClassMethod ConsultaLogPaginacao(pStatus As %Boolean, pLastId As %Integer, pPageSize As %Integer, pDataFim As %String) As treinamento.Data.VO.LogMensagem
+{
+   
+        try 
+        {   
+            Set tSC = $$$OK
+            Set SQL  = "SELECT TOP " _ pPageSize _ " * FROM treinamento_Data.LogMensagem "
+            Set SQL = SQL_"WHERE Status = "_pStatus 
+            Set SQL = SQL_ " AND Fim <= '"_pDataFim_"'"
+            Set SQL = SQL_ "AND ID > "_pLastId
+
+            Set statement = ##class(%SQL.Statement).%New()
+            Set tSC = statement.%Prepare(SQL)
+            If $System.Status.Error(tSC) Throw tSC
+            Set resultSet = statement.%Execute()
+            Set count = 0 
+                While(resultSet.%Next())
+                {
+                    Set count = count +1
+                    Write " ID : ", resultSet.%Get("ID") , " | Metodo : ", resultSet.%Get("Metodo"), " | Classe : ", resultSet.%Get("Classe"), "| Inicio : " , resultSet.%Get("Inicio"), !
+                    Write "Fim : ", resultSet.%Get("Fim"), "| Status : ", resultSet.%Get("Status"), "| StatusProcesso : ", resultSet.%Get("StatusProcesso") , ! 
+                }
+                If count > 0
+                {
+                    W "Total de log encontrados por pagina ", count, ! 
+                }
+                Else
+                {
+                W "Nenhum   log encontrados para essa pesquisa"
+                }
+
+        }
+        Catch(exception)
+        {
+            Set tSC           = exception.AsStatus()
+            Set erroMensagem  = $SYSTEM.Status.GetOneErrorText(tSC)
+            Throw exception
+            
+        }
+    Quit
+}
+
+
 
 Storage Default
 {
